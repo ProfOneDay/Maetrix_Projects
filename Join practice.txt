@@ -1,0 +1,229 @@
+Microsoft Windows [Version 10.0.19045.5854]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>cd/
+
+C:\>cd xampp/mysql/bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 94
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| 1st_dml_quiz               |
+| before_quiz                |
+| bookstore_db               |
+| dml                        |
+| dml_buenaventura           |
+| dml_lab_quiz               |
+| exam                       |
+| examprac_1                 |
+| examprac_2                 |
+| firstlabquiz               |
+| information_schema         |
+| invent                     |
+| invoice                    |
+| lab_exercise               |
+| lab_exercise2              |
+| laboratory                 |
+| laboratory_act             |
+| laboratory_exercise        |
+| lecture_demofeb18          |
+| mysql                      |
+| old_users                  |
+| pano                       |
+| performance_schema         |
+| phpmyadmin                 |
+| relationalalgebra          |
+| trabahanap                 |
+| users                      |
+| your_buenaventura_labexer2 |
++----------------------------+
+28 rows in set (0.001 sec)
+
+MariaDB [(none)]> use invent;
+Database changed
+MariaDB [invent]> select * from customerl
+    -> ;
+ERROR 1146 (42S02): Table 'invent.customerl' doesn't exist
+MariaDB [invent]> slect * from customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'slect * from customer' at line 1
+MariaDB [invent]> select * from customer;
++--------+----------------+------------+
+| custno | custname       | custasddr  |
++--------+----------------+------------+
+| 111    | Michael Acosta | Manaoag    |
+| 222    | Mark Lee       | San Manuel |
+| 333    | MJ             | Manaoag    |
+| 444    | Arya Stark     | Urdaneta   |
++--------+----------------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [invent]> select * from invoice;
++-----------+------------+--------+
+| invoiceno | invoiced8  | custno |
++-----------+------------+--------+
+|     11111 | 2024-09-09 | 111    |
+|     22222 | 2024-09-08 | 222    |
++-----------+------------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select * from item;
++--------+-----------+-----------+
+| itemid | descrip   | unitprice |
++--------+-----------+-----------+
+|    101 | Milo      |    100.50 |
+|    102 | Pad Paper |     50.75 |
++--------+-----------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select * from orders;
++---------+-----+-----------+--------+
+| orderno | qty | invoiceno | itemid |
++---------+-----+-----------+--------+
+|       1 |   2 |     11111 |    101 |
+|       2 |   1 |     11111 |    102 |
+|       3 |   3 |     22222 |    102 |
++---------+-----+-----------+--------+
+3 rows in set (0.001 sec)
+
+MariaDB [invent]> select customer.custno, custname, invoiceno,invoiced8 from customer join invoice on customer.custno = invoice.custno;
++--------+----------------+-----------+------------+
+| custno | custname       | invoiceno | invoiced8  |
++--------+----------------+-----------+------------+
+| 111    | Michael Acosta |     11111 | 2024-09-09 |
+| 222    | Mark Lee       |     22222 | 2024-09-08 |
++--------+----------------+-----------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select item.itemid,descrip,unitprice, qty, from item join orders on item.itemid = orders.itemid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from item join orders on item.itemid = orders.itemid' at line 1
+MariaDB [invent]> select item.itemid,descrip,unitprice, qty from item join orders on item.itemid = orders.itemid;
++--------+-----------+-----------+-----+
+| itemid | descrip   | unitprice | qty |
++--------+-----------+-----------+-----+
+|    101 | Milo      |    100.50 |   2 |
+|    102 | Pad Paper |     50.75 |   1 |
+|    102 | Pad Paper |     50.75 |   3 |
++--------+-----------+-----------+-----+
+3 rows in set (0.001 sec)
+
+MariaDB [invent]> select customer.custno,custname,invoice.invoiceno,invoiced8,qty from customer join invoice on customer.custno = invoice.custno join orders on invoice.invoiceno = orders.invoiceno;
++--------+----------------+-----------+------------+-----+
+| custno | custname       | invoiceno | invoiced8  | qty |
++--------+----------------+-----------+------------+-----+
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   2 |
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   1 |
+| 222    | Mark Lee       |     22222 | 2024-09-08 |   3 |
++--------+----------------+-----------+------------+-----+
+3 rows in set (0.001 sec)
+
+MariaDB [invent]> select customer.custno,custname,invoice.invoiceno,invoiced8,qty, from customer join invoice on customer.custno = invoice.custno join orders on invoice.invoiceno = orders.invoiceno join item on orders.itemid = item.itemid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from customer join invoice on customer.custno = invoice.custno join orders on...' at line 1
+MariaDB [invent]> select customer.custno,custname,invoice.invoiceno,invoiced8,qty from customer join invoice on customer.custno = invoice.custno join orders on invoice.invoiceno = orders.invoiceno join item on orders.itemid = item.itemid;
++--------+----------------+-----------+------------+-----+
+| custno | custname       | invoiceno | invoiced8  | qty |
++--------+----------------+-----------+------------+-----+
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   2 |
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   1 |
+| 222    | Mark Lee       |     22222 | 2024-09-08 |   3 |
++--------+----------------+-----------+------------+-----+
+3 rows in set (0.001 sec)
+
+MariaDB [invent]> select customer.custno,custname,invoice.invoiceno,invoiced8,qty,itemid,descrip,unitprice from customer join invoice on customer.custno = invoice.custno join orders on invoice.invoiceno = orders.invoiceno join item on orders.itemid = item.itemid;
+ERROR 1052 (23000): Column 'itemid' in field list is ambiguous
+MariaDB [invent]> select customer.custno,custname,invoice.invoiceno,invoiced8,qty,item.itemid,descrip,unitprice from customer join invoice on customer.custno = invoice.custno join orders on invoice.invoiceno = orders.invoiceno join item on orders.itemid = item.itemid;
++--------+----------------+-----------+------------+-----+--------+-----------+-----------+
+| custno | custname       | invoiceno | invoiced8  | qty | itemid | descrip   | unitprice |
++--------+----------------+-----------+------------+-----+--------+-----------+-----------+
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   2 |    101 | Milo      |    100.50 |
+| 111    | Michael Acosta |     11111 | 2024-09-09 |   1 |    102 | Pad Paper |     50.75 |
+| 222    | Mark Lee       |     22222 | 2024-09-08 |   3 |    102 | Pad Paper |     50.75 |
++--------+----------------+-----------+------------+-----+--------+-----------+-----------+
+3 rows in set (0.001 sec)
+
+MariaDB [invent]> select sum(qty*unitprice),max(qty*unitprice), avg(qty*unitprice),count(*) from orders join item on item.itemid = orders.itemid;
++--------------------+--------------------+--------------------+----------+
+| sum(qty*unitprice) | max(qty*unitprice) | avg(qty*unitprice) | count(*) |
++--------------------+--------------------+--------------------+----------+
+|             404.00 |             201.00 |         134.666667 |        3 |
++--------------------+--------------------+--------------------+----------+
+1 row in set (0.001 sec)
+
+MariaDB [invent]> select sum(qty*unitprice),max(qty*unitprice) as Richel,min(qty*unitprice) as Aivan, avg(qty*unitprice) as AVERAGE ,count(*) as Ilan from orders join item on item.itemid = orders.itemid;
++--------------------+--------+-------+------------+------+
+| sum(qty*unitprice) | Richel | Aivan | AVERAGE    | Ilan |
++--------------------+--------+-------+------------+------+
+|             404.00 | 201.00 | 50.75 | 134.666667 |    3 |
++--------------------+--------+-------+------------+------+
+1 row in set (0.001 sec)
+
+MariaDB [invent]> select custname, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.invoiceno and invoice.invoiceno = orders.invoiceno from item.itemid = orders.itemid group by custname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from item.itemid = orders.itemid group by custname' at line 1
+MariaDB [invent]> select custname, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.invoiceno = invoice.invoiceno and invoice.invoiceno = orders.invoiceno from item.itemid = orders.itemid group by custname;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'from item.itemid = orders.itemid group by custname' at line 1
+MariaDB [invent]> select custname, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.invoiceno = invoice.invoiceno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid group by custname;
+ERROR 1054 (42S22): Unknown column 'customer.invoiceno' in 'on clause'
+MariaDB [invent]> select custname, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid group by custname;
++----------------+-----------------+
+| custname       | lahat_ng_binili |
++----------------+-----------------+
+| Mark Lee       |          152.25 |
+| Michael Acosta |          251.75 |
++----------------+-----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid group by custname;
++----------------+-----------+-----------------+
+| custname       | invoiceno | lahat_ng_binili |
++----------------+-----------+-----------------+
+| Mark Lee       |     22222 |          152.25 |
+| Michael Acosta |     11111 |          251.75 |
++----------------+-----------+-----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid group by custname, invoiceno;
++----------------+-----------+-----------------+
+| custname       | invoiceno | lahat_ng_binili |
++----------------+-----------+-----------------+
+| Mark Lee       |     22222 |          152.25 |
+| Michael Acosta |     11111 |          251.75 |
++----------------+-----------+-----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid group by custname having lahat_ng_binili between 200 and 500;
++----------------+-----------+-----------------+
+| custname       | invoiceno | lahat_ng_binili |
++----------------+-----------+-----------------+
+| Michael Acosta |     11111 |          251.75 |
++----------------+-----------+-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid and custname = "Mark Lee" groub by custname having lahat_ng_binili between 150 and 500;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'groub by custname having lahat_ng_binili between 150 and 500' at line 1
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid and custname = "Mark Lee" group by custname having lahat_ng_binili between 150 and 500;
++----------+-----------+-----------------+
+| custname | invoiceno | lahat_ng_binili |
++----------+-----------+-----------------+
+| Mark Lee |     22222 |          152.25 |
++----------+-----------+-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [invent]> select custname,invoice.invoiceno, sum(qty * unitprice) as lahat_ng_binili from customer join invoice join orders join item on customer.custno = invoice.custno and invoice.invoiceno = orders.invoiceno and item.itemid = orders.itemid and custname in(select custname from customer where custname="Michael Acosta") group by custname having lahat_ng_binili between 150 and 500;
++----------------+-----------+-----------------+
+| custname       | invoiceno | lahat_ng_binili |
++----------------+-----------+-----------------+
+| Michael Acosta |     11111 |          251.75 |
++----------------+-----------+-----------------+
+1 row in set (0.002 sec)
+
+MariaDB [invent]>

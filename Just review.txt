@@ -1,0 +1,756 @@
+Microsoft Windows [Version 10.0.19045.5854]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Admin>cd\
+
+C:\>cd xampp\mysql\bin;
+The system cannot find the path specified.
+
+C:\>cd xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 27
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| 1st_dml_quiz               |
+| before_quiz                |
+| bookstore_db               |
+| dml                        |
+| dml_buenaventura           |
+| dml_lab_quiz               |
+| exam                       |
+| examprac_1                 |
+| examprac_2                 |
+| firstlabquiz               |
+| information_schema         |
+| invent                     |
+| invoice                    |
+| lab_exercise               |
+| lab_exercise2              |
+| laboratory                 |
+| laboratory_act             |
+| laboratory_exercise        |
+| lecture_demofeb18          |
+| mysql                      |
+| old_users                  |
+| pano                       |
+| performance_schema         |
+| phpmyadmin                 |
+| relationalalgebra          |
+| trabahanap                 |
+| users                      |
+| your_buenaventura_labexer2 |
++----------------------------+
+28 rows in set (0.001 sec)
+
+MariaDB [(none)]> create database kayakoto;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| 1st_dml_quiz               |
+| before_quiz                |
+| bookstore_db               |
+| dml                        |
+| dml_buenaventura           |
+| dml_lab_quiz               |
+| exam                       |
+| examprac_1                 |
+| examprac_2                 |
+| firstlabquiz               |
+| information_schema         |
+| invent                     |
+| invoice                    |
+| kayakoto                   |
+| lab_exercise               |
+| lab_exercise2              |
+| laboratory                 |
+| laboratory_act             |
+| laboratory_exercise        |
+| lecture_demofeb18          |
+| mysql                      |
+| old_users                  |
+| pano                       |
+| performance_schema         |
+| phpmyadmin                 |
+| relationalalgebra          |
+| trabahanap                 |
+| users                      |
+| your_buenaventura_labexer2 |
++----------------------------+
+29 rows in set (0.001 sec)
+
+MariaDB [(none)]> use kayakoto;
+Database changed
+MariaDB [kayakoto]> create table Student(int Student_ID primary key auto_increment, int Student_Name, int Course_ID, int Section_ID, varchar(20) Semester);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int Student_ID primary key auto_increment, int Student_Name, int Course_ID, i...' at line 1
+MariaDB [kayakoto]> create table STUDENT(Student_ID int(11) auto_increment primary key, Student_Name int(11), Course_ID int(int), Section_ID int(11), Semester varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int), Section_ID int(11), Semester varchar(20)' at line 1
+MariaDB [kayakoto]> create table STUDENT(Student_ID int(11) auto_increment primary key, Student_Name int(11), Course_ID int(int), Section_ID int(11), Semester varchar(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int), Section_ID int(11), Semester varchar(20))' at line 1
+MariaDB [kayakoto]> create table STUDENT(Student_ID int(11) auto_increment primary key, Student_Name int(11), Course_ID int(11), Section_ID int(11), Semester varchar(20));
+Query OK, 0 rows affected (0.011 sec)
+
+MariaDB [kayakoto]> describe STUDENT;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| Student_ID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Student_Name | int(11)     | YES  |     | NULL    |                |
+| Course_ID    | int(11)     | YES  |     | NULL    |                |
+| Section_ID   | int(11)     | YES  |     | NULL    |                |
+| Semester     | varchar(20) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.013 sec)
+
+MariaDB [kayakoto]> alter table STUDENT modify column Course_ID varchar(20);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> describe STUDENT;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| Student_ID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Student_Name | int(11)     | YES  |     | NULL    |                |
+| Course_ID    | varchar(20) | YES  |     | NULL    |                |
+| Section_ID   | int(11)     | YES  |     | NULL    |                |
+| Semester     | varchar(20) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.015 sec)
+
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (38214,'Mark','ISM 4212',2714,I-98);
+ERROR 1054 (42S22): Unknown column 'I' in 'field list'
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (38214,'Mark','ISM 4212',2714,i-98);
+ERROR 1054 (42S22): Unknown column 'i' in 'field list'
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (38214,'Mark','ISM 4212',2714,I_98);
+ERROR 1054 (42S22): Unknown column 'I_98' in 'field list'
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (38214,'Mark','ISM 4212',2714,'I_98');
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (54907,'Kokoy','ISM 4212',2714,'I_98');
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (54906,'Howard','ISM 4930',2713,'I_98');
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [kayakoto]> insert into STUDENT(Student_ID, Student_Name,Course_ID,Section_ID,Semester) values (66324,'Aiken','ISM 3113',2713,'I_98');
+Query OK, 1 row affected, 1 warning (0.003 sec)
+
+MariaDB [kayakoto]> Select * from STUDENT;
++------------+--------------+-----------+------------+----------+
+| Student_ID | Student_Name | Course_ID | Section_ID | Semester |
++------------+--------------+-----------+------------+----------+
+|      38214 |            0 | ISM 4212  |       2714 | I_98     |
+|      54906 |            0 | ISM 4930  |       2713 | I_98     |
+|      54907 |            0 | ISM 4212  |       2714 | I_98     |
+|      66324 |            0 | ISM 3113  |       2713 | I_98     |
++------------+--------------+-----------+------------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> aler table STUDENT modify column Student_Name varchar(20);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'aler table STUDENT modify column Student_Name varchar(20)' at line 1
+MariaDB [kayakoto]> alter table STUDENT modify column Student_Name varchar(20);
+Query OK, 4 rows affected (0.038 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> select * from student;
++------------+--------------+-----------+------------+----------+
+| Student_ID | Student_Name | Course_ID | Section_ID | Semester |
++------------+--------------+-----------+------------+----------+
+|      38214 | 0            | ISM 4212  |       2714 | I_98     |
+|      54906 | 0            | ISM 4930  |       2713 | I_98     |
+|      54907 | 0            | ISM 4212  |       2714 | I_98     |
+|      66324 | 0            | ISM 3113  |       2713 | I_98     |
++------------+--------------+-----------+------------+----------+
+4 rows in set (0.002 sec)
+
+MariaDB [kayakoto]> Update STUDENT SET Student_Name='Mark' where Student_ID=38214;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> select * from STUDENT;
++------------+--------------+-----------+------------+----------+
+| Student_ID | Student_Name | Course_ID | Section_ID | Semester |
++------------+--------------+-----------+------------+----------+
+|      38214 | Mark         | ISM 4212  |       2714 | I_98     |
+|      54906 | 0            | ISM 4930  |       2713 | I_98     |
+|      54907 | 0            | ISM 4212  |       2714 | I_98     |
+|      66324 | 0            | ISM 3113  |       2713 | I_98     |
++------------+--------------+-----------+------------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> update STUDENT SET Student_Name='Kokoy' where student_ID=54907;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update STUDENT SET Student_Name='Howard' where student_ID=54906;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update STUDENT SET Student_Name='Aiken' where student_ID=66324;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> select * from STUDENT;
++------------+--------------+-----------+------------+----------+
+| Student_ID | Student_Name | Course_ID | Section_ID | Semester |
++------------+--------------+-----------+------------+----------+
+|      38214 | Mark         | ISM 4212  |       2714 | I_98     |
+|      54906 | Howard       | ISM 4930  |       2713 | I_98     |
+|      54907 | Kokoy        | ISM 4212  |       2714 | I_98     |
+|      66324 | Aiken        | ISM 3113  |       2713 | I_98     |
++------------+--------------+-----------+------------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> create table COURSE(Course_ID int primary key,Course_Name varchar(100);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [kayakoto]> create table COURSE(Course_ID int primary key,Course_Name varchar(100));
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [kayakoto]> describe COURSE;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Course_ID   | int(11)      | NO   | PRI | NULL    |       |
+| Course_Name | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> alter table COURSE modify column CourseID varchar(100);
+ERROR 1054 (42S22): Unknown column 'CourseID' in 'course'
+MariaDB [kayakoto]> alter table COURSE modify column Course_ID varchar(100);
+Query OK, 0 rows affected (0.025 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> describe course;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Course_ID   | varchar(100) | NO   | PRI | NULL    |       |
+| Course_Name | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> insert into COURSE(Course_ID,Course_Name) values ('ISM 3113','Robotics and Engineering');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [kayakoto]> insert into COURSE(Course_ID,Course_Name) values ('ISM 4212','System Analysis And Design');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [kayakoto]> insert into COURSE(Course_ID,Course_Name) values ('ISM 4756','Software Engineering');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE(Course_ID,Course_Name) values ('ISM 4930','Computer Graphics');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE(Course_ID,Course_Name) values ('ISM 4215','Data Structures');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> select * from course;
++-----------+----------------------------+
+| Course_ID | Course_Name                |
++-----------+----------------------------+
+| ISM 3113  | Robotics and Engineering   |
+| ISM 4212  | System Analysis And Design |
+| ISM 4215  | Data Structures            |
+| ISM 4756  | Software Engineering       |
+| ISM 4930  | Computer Graphics          |
++-----------+----------------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> create table FACULTY(Faculty_ID int(11),Faculty_Name varchar(100));
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (2143,'Banwa');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (3487,'Berganio');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (4756,'Cali');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (3487,'Bernard');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> select * from faculty;
++------------+--------------+
+| Faculty_ID | Faculty_Name |
++------------+--------------+
+|       2143 | Banwa        |
+|       3487 | Berganio     |
+|       4756 | Cali         |
+|       3487 | Bernard      |
++------------+--------------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> create table COURSE_HANDLED(Trans_no int(11) primary key, Faculty_ID int(11),Course_ID varchar(100), Year_Completed date);
+Query OK, 0 rows affected (0.010 sec)
+
+MariaDB [kayakoto]> describe COURSE_HANDLED;
++----------------+--------------+------+-----+---------+-------+
+| Field          | Type         | Null | Key | Default | Extra |
++----------------+--------------+------+-----+---------+-------+
+| Trans_no       | int(11)      | NO   | PRI | NULL    |       |
+| Faculty_ID     | int(11)      | YES  |     | NULL    |       |
+| Course_ID      | varchar(100) | YES  |     | NULL    |       |
+| Year_Completed | date         | YES  |     | NULL    |       |
++----------------+--------------+------+-----+---------+-------+
+4 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> alter table COURSE_HANDLED modify column Trans_no auto_increment;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [kayakoto]> alter table COURSE_HANDLED modify column Trans_no int auto_increment;
+Query OK, 0 rows affected (0.023 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> describe COURSE_HANDLED;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| Trans_no       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Faculty_ID     | int(11)      | YES  |     | NULL    |                |
+| Course_ID      | varchar(100) | YES  |     | NULL    |                |
+| Year_Completed | date         | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.015 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,2143,'ISM 3113','1998');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,2143,'ISM 4212','1995');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,2143,'ISM 4756','1998');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,3487,'ISM 4756','1994');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,4756,'ISM 4212','1998');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,3487,'ISM 4215','1998');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> insert into COURSE_HANDLED(Trans_no,Faculty_ID,Course_ID,Year_Completed) values (NULL,4756,'ISM 3113','1997');
+Query OK, 1 row affected, 1 warning (0.002 sec)
+
+MariaDB [kayakoto]> select * from COURSE_HANDLED;
++----------+------------+-----------+----------------+
+| Trans_no | Faculty_ID | Course_ID | Year_Completed |
++----------+------------+-----------+----------------+
+|        1 |       2143 | ISM 3113  | 0000-00-00     |
+|        2 |       2143 | ISM 4212  | 0000-00-00     |
+|        3 |       2143 | ISM 4756  | 0000-00-00     |
+|        4 |       3487 | ISM 4756  | 0000-00-00     |
+|        5 |       4756 | ISM 4212  | 0000-00-00     |
+|        6 |       3487 | ISM 4215  | 0000-00-00     |
+|        7 |       4756 | ISM 3113  | 0000-00-00     |
++----------+------------+-----------+----------------+
+7 rows in set (0.000 sec)
+
+MariaDB [kayakoto]> alter table COURSE_HANDLED modify column Year_Completed int;
+Query OK, 7 rows affected (0.026 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> select * from COURSE_HANDLED;
++----------+------------+-----------+----------------+
+| Trans_no | Faculty_ID | Course_ID | Year_Completed |
++----------+------------+-----------+----------------+
+|        1 |       2143 | ISM 3113  |              0 |
+|        2 |       2143 | ISM 4212  |              0 |
+|        3 |       2143 | ISM 4756  |              0 |
+|        4 |       3487 | ISM 4756  |              0 |
+|        5 |       4756 | ISM 4212  |              0 |
+|        6 |       3487 | ISM 4215  |              0 |
+|        7 |       4756 | ISM 3113  |              0 |
++----------+------------+-----------+----------------+
+7 rows in set (0.004 sec)
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1998 where Trans_no=1;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> select * from COURSE_HANDLED;
++----------+------------+-----------+----------------+
+| Trans_no | Faculty_ID | Course_ID | Year_Completed |
++----------+------------+-----------+----------------+
+|        1 |       2143 | ISM 3113  |           1998 |
+|        2 |       2143 | ISM 4212  |              0 |
+|        3 |       2143 | ISM 4756  |              0 |
+|        4 |       3487 | ISM 4756  |              0 |
+|        5 |       4756 | ISM 4212  |              0 |
+|        6 |       3487 | ISM 4215  |              0 |
+|        7 |       4756 | ISM 3113  |              0 |
++----------+------------+-----------+----------------+
+7 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1995 where Trans_no=2;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1998 where Trans_no=3;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1994 where Trans_no=4;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1998 where Trans_no=5;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1998 where Trans_no=6;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> update COURSE_HANDLED set Year_Completed=1997 where Trans_no=7;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> select * from COURSE_HANDLED;
++----------+------------+-----------+----------------+
+| Trans_no | Faculty_ID | Course_ID | Year_Completed |
++----------+------------+-----------+----------------+
+|        1 |       2143 | ISM 3113  |           1998 |
+|        2 |       2143 | ISM 4212  |           1995 |
+|        3 |       2143 | ISM 4756  |           1998 |
+|        4 |       3487 | ISM 4756  |           1994 |
+|        5 |       4756 | ISM 4212  |           1998 |
+|        6 |       3487 | ISM 4215  |           1998 |
+|        7 |       4756 | ISM 3113  |           1997 |
++----------+------------+-----------+----------------+
+7 rows in set (0.000 sec)
+
+MariaDB [kayakoto]> alter table STUDENT add foreign key fk1 (Course_ID) references COURSE(Course_ID);
+Query OK, 4 rows affected (0.041 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> describe STUDENT;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| Student_ID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Student_Name | varchar(20) | YES  |     | NULL    |                |
+| Course_ID    | varchar(20) | YES  | MUL | NULL    |                |
+| Section_ID   | int(11)     | YES  |     | NULL    |                |
+| Semester     | varchar(20) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.016 sec)
+
+MariaDB [kayakoto]> alter table COURSE_HANDLED add foreign key fk2 (Course_ID) references COURSE(Course_ID);
+Query OK, 7 rows affected (0.037 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> alter table COURSE_HANDLED add foreign key fk3 (Faculty_ID) references FACULTY(Faculty_ID);
+ERROR 1005 (HY000): Can't create table `kayakoto`.`course_handled` (errno: 150 "Foreign key constraint is incorrectly formed")
+MariaDB [kayakoto]> alter table COURSE_HANDLED add foreign key fk3 (Faculty_ID) references FACULTY(Faculty_ID);
+ERROR 1005 (HY000): Can't create table `kayakoto`.`course_handled` (errno: 150 "Foreign key constraint is incorrectly formed")
+MariaDB [kayakoto]> describe COURSE_HANDLED;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| Trans_no       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Faculty_ID     | int(11)      | YES  |     | NULL    |                |
+| Course_ID      | varchar(100) | YES  | MUL | NULL    |                |
+| Year_Completed | int(11)      | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.015 sec)
+
+MariaDB [kayakoto]> describe FACULTY;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Faculty_ID   | int(11)      | YES  |     | NULL    |       |
+| Faculty_Name | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+2 rows in set (0.013 sec)
+
+MariaDB [kayakoto]> alter table COURSE_HANDLED add foreign key fk3 (Faculty_ID) references FACULTY(Faculty_ID);
+ERROR 1005 (HY000): Can't create table `kayakoto`.`course_handled` (errno: 150 "Foreign key constraint is incorrectly formed")
+MariaDB [kayakoto]> alter table FACULTY modify column Faculty_ID int(11) primary key;
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> alter table FACULTY modify column Faculty_ID int primary key;
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> alter table FACULTY add primary key(Faculty_ID);
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> ALTER TABLE FACULTY ADD PRIMARY KEY (Faculty_ID);
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> Bye
+Ctrl-C -- exit!
+
+C:\xampp\mysql\bin>mysql -u root -p;
+ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 37
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++----------------------------+
+| Database                   |
++----------------------------+
+| 1st_dml_quiz               |
+| before_quiz                |
+| bookstore_db               |
+| dml                        |
+| dml_buenaventura           |
+| dml_lab_quiz               |
+| exam                       |
+| examprac_1                 |
+| examprac_2                 |
+| firstlabquiz               |
+| information_schema         |
+| invent                     |
+| invoice                    |
+| kayakoto                   |
+| lab_exercise               |
+| lab_exercise2              |
+| laboratory                 |
+| laboratory_act             |
+| laboratory_exercise        |
+| lecture_demofeb18          |
+| mysql                      |
+| old_users                  |
+| pano                       |
+| performance_schema         |
+| phpmyadmin                 |
+| relationalalgebra          |
+| trabahanap                 |
+| users                      |
+| your_buenaventura_labexer2 |
++----------------------------+
+29 rows in set (0.001 sec)
+
+MariaDB [(none)]> use kayakoto;
+Database changed
+MariaDB [kayakoto]> show tables;
++--------------------+
+| Tables_in_kayakoto |
++--------------------+
+| course             |
+| course_handled     |
+| faculty            |
+| student            |
++--------------------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> describe course;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Course_ID   | varchar(100) | NO   | PRI | NULL    |       |
+| Course_Name | varchar(100) | YES  |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+2 rows in set (0.016 sec)
+
+MariaDB [kayakoto]> describe course_handled;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| Trans_no       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Faculty_ID     | int(11)      | YES  |     | NULL    |                |
+| Course_ID      | varchar(100) | YES  | MUL | NULL    |                |
+| Year_Completed | int(11)      | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> describe faculty;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Faculty_ID   | int(11)      | YES  |     | NULL    |       |
+| Faculty_Name | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> describe student;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| Student_ID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| Student_Name | varchar(20) | YES  |     | NULL    |                |
+| Course_ID    | varchar(20) | YES  | MUL | NULL    |                |
+| Section_ID   | int(11)     | YES  |     | NULL    |                |
+| Semester     | varchar(20) | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+5 rows in set (0.012 sec)
+
+MariaDB [kayakoto]> drop table faculty;
+Query OK, 0 rows affected (0.006 sec)
+
+MariaDB [kayakoto]> create table FACULTY(Faculty_ID int(11) primary key,Faculty_Name varchar(100);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [kayakoto]> create table FACULTY(Faculty_ID int(11) primary key,Faculty_Name varchar(100));
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [kayakoto]> describe faculty;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Faculty_ID   | int(11)      | NO   | PRI | NULL    |       |
+| Faculty_Name | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (2143,'Banwa');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (3487,'Berganio');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (4756,'Cali');
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (3487,'Cali');
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> insert into FACULTY(Faculty_ID,Faculty_Name) values (3487,'Bernard');
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> select * from faculty;
++------------+--------------+
+| Faculty_ID | Faculty_Name |
++------------+--------------+
+|       2143 | Banwa        |
+|       3487 | Berganio     |
+|       4756 | Cali         |
++------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> insert into faculty(faculty_ID,Faculty_name) values (3487,'Bernard');
+ERROR 1062 (23000): Duplicate entry '3487' for key 'PRIMARY'
+MariaDB [kayakoto]> insert into faculty(faculty_ID,Faculty_name) values (3486,'Bernard');
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [kayakoto]> alter table COURSE_HANDELED add foreign key f3 (Faculty_ID) references Faculty(Faculty_ID);
+ERROR 1146 (42S02): Table 'kayakoto.course_handeled' doesn't exist
+MariaDB [kayakoto]> alter table COURSE_HANDLED add foreign key f3 (Faculty_ID) references Faculty(Faculty_ID);
+Query OK, 7 rows affected (0.041 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+MariaDB [kayakoto]> select * from COURSE_HANDLED;
++----------+------------+-----------+----------------+
+| Trans_no | Faculty_ID | Course_ID | Year_Completed |
++----------+------------+-----------+----------------+
+|        1 |       2143 | ISM 3113  |           1998 |
+|        2 |       2143 | ISM 4212  |           1995 |
+|        3 |       2143 | ISM 4756  |           1998 |
+|        4 |       3487 | ISM 4756  |           1994 |
+|        5 |       4756 | ISM 4212  |           1998 |
+|        6 |       3487 | ISM 4215  |           1998 |
+|        7 |       4756 | ISM 3113  |           1997 |
++----------+------------+-----------+----------------+
+7 rows in set (0.002 sec)
+
+MariaDB [kayakoto]> describe COURSE_HANDLED;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| Trans_no       | int(11)      | NO   | PRI | NULL    | auto_increment |
+| Faculty_ID     | int(11)      | YES  | MUL | NULL    |                |
+| Course_ID      | varchar(100) | YES  | MUL | NULL    |                |
+| Year_Completed | int(11)      | YES  |     | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+4 rows in set (0.014 sec)
+
+MariaDB [kayakoto]> update table set Student_Name='Macky',Section_ID=2712,Course_ID='ISM 4215',Semester='I_97' where Student_ID = 66324;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table set Student_Name='Macky',Section_ID=2712,Course_ID='ISM 4215',Semester=...' at line 1
+MariaDB [kayakoto]> update STUDENT set Student_Name='Macky',Section_ID=2712,Course_ID='ISM 4215',Semester='I_97' where Student_ID = 66324;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [kayakoto]> select * from student;
++------------+--------------+-----------+------------+----------+
+| Student_ID | Student_Name | Course_ID | Section_ID | Semester |
++------------+--------------+-----------+------------+----------+
+|      38214 | Mark         | ISM 4212  |       2714 | I_98     |
+|      54906 | Howard       | ISM 4930  |       2713 | I_98     |
+|      54907 | Kokoy        | ISM 4212  |       2714 | I_98     |
+|      66324 | Macky        | ISM 4215  |       2712 | I_97     |
++------------+--------------+-----------+------------+----------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> Alter table delete row where Course_Name like '&struct&';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'delete row where Course_Name like '&struct&'' at line 1
+MariaDB [kayakoto]> delete from course where course_name like '%struct%';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`kayakoto`.`student`, CONSTRAINT `fk1` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`))
+MariaDB [kayakoto]> delete from course where Course_Name like '%struct%';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`kayakoto`.`student`, CONSTRAINT `fk1` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`))
+MariaDB [kayakoto]> DELETE FROM Course
+    -> WHERE Course_Name LIKE '%struct%';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`kayakoto`.`student`, CONSTRAINT `fk1` FOREIGN KEY (`Course_ID`) REFERENCES `course` (`Course_ID`))
+MariaDB [kayakoto]> select student_name, student_id from student where section_id=2714 and course_id='4212;
+    '> ;
+    '> '
+    -> ;
+Empty set (0.001 sec)
+
+MariaDB [kayakoto]> select student_name, student_id froms student where section_id=2714 and course_id='ISM 4212';
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'student where section_id=2714 and course_id='ISM 4212'' at line 1
+MariaDB [kayakoto]> select student_name, student_id from student where section_id=2714 and course_id='ISM 4212';
++--------------+------------+
+| student_name | student_id |
++--------------+------------+
+| Mark         |      38214 |
+| Kokoy        |      54907 |
++--------------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> select course.course_ID, course_name,year_completed from course JOIN course_handled ON course.courseID=course_handled.course_ID where year_completed=1998;
+ERROR 1054 (42S22): Unknown column 'course.courseID' in 'on clause'
+MariaDB [kayakoto]> select course.course_ID, course_name,year_completed from course JOIN course_handled ON course.course_ID=course_handled.course_ID where year_completed=1998;
++-----------+----------------------------+----------------+
+| course_ID | course_name                | year_completed |
++-----------+----------------------------+----------------+
+| ISM 3113  | Robotics and Engineering   |           1998 |
+| ISM 4756  | Software Engineering       |           1998 |
+| ISM 4212  | System Analysis And Design |           1998 |
+| ISM 4215  | Data Structures            |           1998 |
++-----------+----------------------------+----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> select course.course_ID,course_name,year_completed from course join course_handled on course_handled.course_ID=course.course_ID where year_completed=1998;
++-----------+----------------------------+----------------+
+| course_ID | course_name                | year_completed |
++-----------+----------------------------+----------------+
+| ISM 3113  | Robotics and Engineering   |           1998 |
+| ISM 4756  | Software Engineering       |           1998 |
+| ISM 4212  | System Analysis And Design |           1998 |
+| ISM 4215  | Data Structures            |           1998 |
++-----------+----------------------------+----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [kayakoto]> select course.course_ID,faculty_name from course where course_ID='ISM 4756';
+ERROR 1054 (42S22): Unknown column 'faculty_name' in 'field list'
+MariaDB [kayakoto]> select course.course_ID,faculty.faculty_name from course where course_ID='ISM 4756';
+ERROR 1054 (42S22): Unknown column 'faculty.faculty_name' in 'field list'
+MariaDB [kayakoto]> describe faculty;
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| Faculty_ID   | int(11)      | NO   | PRI | NULL    |       |
+| Faculty_Name | varchar(100) | YES  |     | NULL    |       |
++--------------+--------------+------+-----+---------+-------+
+2 rows in set (0.019 sec)
+
+MariaDB [kayakoto]> ^S
